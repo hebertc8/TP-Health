@@ -1,0 +1,25 @@
+:host ::ng-deep {
+    .is-invalid {
+        border: solid red 2px;
+    }
+    .jumbotron {
+        background: transparent !important;
+    }
+    .form-input-centered {
+        width: 300px;
+        margin: auto;
+    }
+    .button-container {
+        margin-top: 10px;
+    }
+
+    .button-container button{
+        margin-right: 10px;
+    }
+
+    
+    .button-right {
+        float: right;
+        margin-right: 0px;
+    }
+}

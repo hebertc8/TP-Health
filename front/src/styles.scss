@@ -1,0 +1,26 @@
+@import 'themes';
+
+@import '~@nebular/theme/styles/globals';
+
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+
+.app-header {
+  width: 100%;
+}
+
+body::before{
+  content:'';
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  background:url(assets/img/bg.jpg) center center no-repeat;
+  background-size:cover;
+  will-change:transform;
+  z-index:-1
+}
+

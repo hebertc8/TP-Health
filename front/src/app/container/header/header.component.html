@@ -1,0 +1,17 @@
+<div class="header">
+    <div class="header-container">
+        <div class="logo-container">
+            <a class="logo" href="#" (click)="navigateHome()">TP Health Check</a>
+        </div>
+    </div>
+
+    <div class="header-container">
+        <nb-actions size="small">
+            <nb-action class="user-action">
+                <nb-user classs="nb-user"[name]="this.userInfo.nombre" [title]="this.userInfo.username"
+                    [nbContextMenu]="profileMenu" nbContextMenuTag="menu-action">
+                </nb-user>
+            </nb-action>
+        </nb-actions>
+    </div>
+</div>

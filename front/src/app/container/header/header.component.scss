@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    width: 10%
+  }
+
+  .user-action {
+    height: auto;
+    display: flex;
+    align-content: center;
+  }
+
+  .nb-user {
+    cursor: pointer;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    width: auto;
+
+    .sidebar-toggle {
+      text-decoration: none;
+      color: nb-theme(text-hint-color);      
+    }
+
+    .logo {
+      padding: 0 1.25rem;
+      font-size: 1.75rem;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+  }
+}

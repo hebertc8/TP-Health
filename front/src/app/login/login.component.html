@@ -1,0 +1,30 @@
+<main class="auth-main">
+	<div class="auth-block">
+        <h1>TP Health Check</h1>
+        <h5>Inicia sesion con tus credenciales de CCMS</h5>
+		<form class="form-horizontal col-12" aria-labelledby="title" [formGroup]="form" (ngSubmit)="login(form.valid)">
+			<div class="form-group">
+                <label for="user" class="label hidden">User</label>
+				<div class="col-12">
+					<input type="text" nbInput style="width: 100%; max-width: 100%;"
+						class="form-control col-12" formControlName="user"
+						id="user" placeholder="tuusuario.5" autofocus>
+				</div>
+			</div>
+			<div class="form-group">
+                <label for="password" class="label hidden">Password</label>
+				<div class="col-12">
+					<input type="{{showPassword ? 'text' : 'password'}}" nbInput
+						class="form-control col-12" formControlName="password"
+						id="password" placeholder="Contrase&#241;a CCMS" (enter)="login(form.valid)">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-12">
+					<button class="form-control btn-info" nbButton [nbSpinner]="loading" nbSpinnerStatus="primary" fullWidth status="primary" type="submit"
+					[disabled]="form.invalid">Sign in</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</main>

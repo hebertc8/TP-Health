@@ -1,0 +1,256 @@
+<nb-card>
+	<nb-card-body>
+		<form [formGroup]="MainForm" (ngSubmit)="onFirstSubmit()">
+      <nb-stepper orientation="horizontal" disableStepNavigation #HealthCheck>
+
+        <nb-step label="Privacidad">
+					<h4>Aviso de Privacidad</h4>
+          <p>
+						Autorizo a Grupo Teleperformance, como mi empleador el tratamiento de mis datos personales, incluyendo los de salud que son sensibles, con la finalidad de desarrollar acciones de promoción, prevención, tratamiento para la gestión de riesgo en salud y/o frente a la propagación, contagio y control de COVID-19, acorde con lo regulado por el Ministerio de Salud y Protección Social y las demás autoridades competentes, y para las demás finalidades que se encuentran establecidas en la política de privacidad que puede ser consultada en <a href="http://www.teleperformance.co/media/4194308/politica-de-tratamiento-de-informacion-grupo-tp-colombia.pdf">http://www.teleperformance.co/media/4194308/politica-de-tratamiento-de-informacion-grupo-tp-colombia.pdf</a> donde además se encuentran los canales de contacto, y la forma de ejercer mis derechos a revocar la autorización, conocer, actualizar, rectificar y suprimir mi información.
+					</p>
+					<p>
+						Será posible compartir información con distintas entidades públicas (del nivel central, descentralizadas y de vigilancia y control, y demás autoridades administrativas y jurisdiccionales), para tomar acciones frente a la propagación, contagio y control de COVID-19.
+					</p>
+					<p>
+						Se entiende por tratamiento de datos, la facultad que tendrá el Grupo Teleperformance de almacenar, compartir, utilizar, procesar, recolectar, divulgar, transferir, transmitir, información relacionada con el estado de salud, en cumplimiento de las disposiciones legales.
+          </p>
+          <div class="form-input-centered">
+            <label for="Acepto">Acepto</label>
+            <select formControlName="Acepto" value="" class="form-control" #Acepto (change)="CheckAcepto(Acepto.value)" [ngClass]="{'is-invalid': !validators.acepto}">
+              <option value="">Choose an option</option>
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div class="form-input-centered button-container">
+            <button nbButton (click)="Aceptas(Acepto.value)" [disabled]="!validators.acepto">Siguiente</button>
+          </div>
+        </nb-step>
+
+        <nb-step label="Encuesta" #SecondStep>
+          <div class="form-input-centered">
+            <label for="Lugar">¿Te encuentras en site o en casa?</label>
+            <select formControlName="Lugar" value="" class="form-control" #Lugar (change)="CheckLugar(Lugar.value)" [ngClass]="{'is-invalid': !validators.lugar}">
+              <option value="" selected>Choose an option</option>
+              <option value="Site">Site</option>
+              <option value="Casa">Casa</option>
+            </select>
+          </div>
+
+          <div *ngIf="validators.site == true" class="form-input-centered">
+            <label for="Site">¿En que site te encuentras?</label>
+            <select formControlName="Site" class="form-control" #Site (change)="CheckSite(Site.value)" [ngClass]="{'is-invalid': !validators.sitename}">
+              <option value="">Choose an option</option>
+              <option value="TPCO Africa">TPCO Africa</option>
+              <option value="TPCO Amazonia">TPCO Amazonia</option>
+              <option value="TPCO Americas">TPCO Americas</option>
+              <option value="TPCO Andalucia">TPCO Andalucia</option>
+              <option value="TPCO Andes1">TPCO Andes1</option>
+              <option value="TPCO Andes2">TPCO Andes2</option>
+              <option value="TPCO Antioquia">TPCO Antioquia</option>
+              <option value="TPCO Barrio Colombia">TPCO Barrio Colombia</option>
+              <option value="TPCO Blue Gardens">TPCO Blue Gardens</option>
+              <option value="TPCO BTS0">TPCO BTS0</option>
+              <option value="TPCO BTS3">TPCO BTS3</option>
+              <option value="TPCO Cervecería Itagüi">TPCO Cervecería Itagüi</option>
+              <option value="TPCO Cataluna">TPCO Cataluna</option>
+              <option value="TPCO Europa">TPCO Europa</option>
+              <option value="TPCO Green Hills Tunja">TPCO Green Hills Tunja</option>
+              <option value="TPCO Habitat Bogota">TPCO Habitat Bogota</option>
+              <option value="TPCO Habitat Barranquilla">TPCO Habitat Barranquilla</option>
+              <option value="TPCO Habitat Medellín">TPCO Habitat Medellín</option>
+              <option value="TPCO Iserra 100">TPCO Iserra 100</option>
+              <option value="TPCO Lote 101">TPCO Lote 101</option>
+              <option value="TPCO Lote 114">TPCO Lote 114</option>
+              <option value="TPCO North Point">TPCO North Point</option>
+              <option value="TPCO Oceanía">TPCO Oceanía</option>
+              <option value="TPCO Pacifico">TPCO Pacifico</option>
+              <option value="TPCO Puerta del Sol">TPCO Puerta del Sol</option>
+              <option value="TPCO Textura">TPCO Textura</option>
+              <option value="Cliente Site/oficinas">Cliente Site/oficinas</option>
+            </select>
+          </div>
+
+          <div class="form-input-centered">
+            <label for="Fiebre">¿Hoy has tenido fiebre o síntomas de gripa?</label>
+            <select formControlName="Fiebre" class="form-control" #Fiebre (change)="CheckFiebre(Fiebre.value)" [ngClass]="{'is-invalid': !validators.fiebre}">
+              <option value="" selected>Choose an option</option>
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <div *ngIf="validators.tieneFiebre != true && validators.fiebre == true" class="form-input-centered">
+            <label for="Temperatura">¿Mediste tu temperatura el día de hoy?</label>
+            <select formControlName="Temperatura" class="form-control" #Temperatura (change)="CheckTemperatura(Temperatura.value)" [ngClass]="{'is-invalid': !validators.temperatura}">
+              <option value="" selected>Choose an option</option>
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <div class="form-input-centered" *ngIf="validators.tieneFiebre != true && validators.fiebre == true && validators.midiotemperatura == true">
+            <label for="Grados">¿Tu temperatura es?</label>
+            <input type="text" formControlName="Grados" class="form-control" #Grados (change)="CheckGrados(Grados.value)" (keyup)="CheckGrados(Grados.value)" [ngClass]="{'is-invalid': !validators.grados}">
+          </div>
+
+          <div class="form-input-centered" *ngIf="validators.tieneFiebre != true && validators.fiebre == true && validators.midiotemperatura == true">
+            <label for="Unidad">Unidad de medida de temperatura</label>
+            <select formControlName="Unidad" class="form-control" #Unidad (change)="CheckUnidad(Unidad.value)" [ngClass]="{'is-invalid': !validators.unidad}">
+              <option value="" selected>Choose an option</option>
+              <option value="Grados Centigrados (ºC)">Grados Centigrados (ºC)</option>
+              <option value="Grados Fahrenheit (ºF)">Grados Fahrenheit (ºF)</option>
+            </select>
+          </div>
+          
+          <div class="form-input-centered" *ngIf="validators.tieneFiebre != true && validators.fiebre == true && validators.midiotemperatura == true">
+            <label for="Contacto">¿Has tenido contacto, vives o cuidas personas con COVID-19?</label>
+            <select formControlName="Contacto" class="form-control" #Contacto (change)="CheckContacto(Contacto.value)" [ngClass]="{'is-invalid': !validators.contacto}">
+              <option value="" selected>Choose an option</option>
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <div class="form-input-centered" *ngIf="validators.tieneFiebre != true && validators.fiebre == true && validators.midiotemperatura == false && validators.temperatura == true">
+            <label for="Termometro">Es deber adquirir un termómetro y monitorear tu temperatura todos los días</label>
+            <br>
+            <label><input formControlName="Termometro" (change)="updateSigForm()" #Termometro type="checkbox" value="¡Lo haré!">¡Lo haré!</label>
+          </div>
+
+          <div class="form-input-centered button-container">
+            <button nbButton nbStepperPrevious>Anterior</button>
+            <button class="button-right" nbButton  (click)="SigFormSave()" [disabled]="!validators.canPass2">Siguiente</button>
+          </div>
+
+        </nb-step>
+
+        <nb-step label="Sintomas" #SintomasSect [hidden]="true">
+					<h4>Gracias</h4>
+          <p>
+            A continuación puedes seleccionar los síntomas por los cuales no te sientes bien de salud, Teleperformance te recomienda utilizar tapabocas (incluso en la casa). Realizaremos el seguimiento pertinente al numero telefónico que nos proporciones.
+          </p>
+          <p>
+            NOTA: Si has tenido resultado positivo de pruebas COVID19 en los últimos 15 días, debes informar el resultado y la conducta médica a tu empleador, y debes cumplir el aislamiento que te han indicado
+          </p>
+
+          <div class="form-input-centered">
+            <label for="Lugar">¿Cuales síntomas presentas el día de hoy?</label>
+            <br>
+            <label><input formControlName="Sint_Fiebre" type='checkbox' value='Fiebre >38°C'>Fiebre >38°C</label>
+            <br>
+            <label><input formControlName="Sint_Malestar" type='checkbox' value='Malestar general'>Malestar general</label>
+            <br>
+            <label><input formControlName="Sint_Congestion" type='checkbox' value='Congestión nasal'>Congestión nasal</label>
+            <br>
+            <label><input formControlName="Sint_Tos" type='checkbox' value='Tos'>Tos</label>
+            <br>
+            <label><input formControlName="Sint_Dificultad_Res" type='checkbox' value='Dificultad para respirar'>Dificultad para respirar</label>
+            <br>
+            <label><input formControlName="Sint_Garganta" type='checkbox' value='Dolor de garganta'>Dolor de garganta</label>
+            <br>
+            <label><input formControlName="Sint_Pecho" type='checkbox' value='Dolor en el pecho'>Dolor en el pecho</label>
+            <br>
+            <label><input formControlName="Sint_Cabeza" type='checkbox' value='Dolor de cabeza'>Dolor de cabeza</label>
+            <br>
+            <label><input formControlName="Sint_Ninguno" type='checkbox' value='Ninguno de los anteriores'>Ninguno de los anteriores</label>
+          </div>
+   
+
+          <div class="form-input-centered">
+            <label for="Contacto">¿Te han hecho exámenes o pruebas para COVID-19?</label>
+            <select formControlName="Prueba" class="form-control" #Prueba (change)="CheckPrueba(Prueba.value)" [ngClass]="{'is-invalid': !validators.prueba}">
+              <option value="" ngSelected="true">Choose an option</option>
+              <option value="Si">Si</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+
+          <div *ngIf="MainForm.value.Prueba == 'Si'" class="form-input-centered">
+            <label for="Resultado">¿Cuál fue el resultado del examen o prueba para COVID-19?</label>
+            <select formControlName="Resultado" class="form-control" #Resultado (change)="CheckResultado(Resultado.value)" [ngClass]="{'is-invalid': !validators.resultado}">
+              <option value="" ngSelected="true">Choose an option</option>
+              <option value="Positivo">Positivo</option>
+              <option value="Negativo">Negativo</option>
+              <option value="Pendiente el resultado">Pendiente el resultado</option>
+              <option value="Indeterminado">Indeterminado</option>
+            </select>
+          </div>
+
+          <div *ngIf="MainForm.value.Prueba == 'No'" class="form-input-centered">
+            <label for="VisitarMed">Recuerda consultar al servicio de salud o a tu médico de confianza</label>
+            <label><input type="checkbox" formControlName="VisitarMed" #VisitarMed (change)="CheckVisitarMed(VisitarMed.value)" [ngClass]="{'is-invalid': !validators.visitarmed}">¡Lo haré!</label>
+          </div>
+
+          <div *ngIf="MainForm.value.Prueba == 'Si' || MainForm.value.Prueba == 'No'" class="form-input-centered">
+            <label for="NombreCel">¿Indícanos tu nombre y número celular?</label>
+            <input formControlName="NombreCel" class="form-control" #NombreCel (change)="CheckNombreCel(NombreCel.value)" (keyup)="CheckNombreCel(NombreCel.value)" [ngClass]="{'is-invalid': !validators.nombrecel}">
+          </div>
+
+
+
+            <div class="button-container form-input-centered">
+              <button nbButton (click)="AnteriorAintomas()">Anterior</button>
+              <button class="button-right" nbButton (click)="SendData(3)" [disabled]="!validators.SintForm">Enviar</button>
+            </div>
+        </nb-step>
+
+        <nb-step label="Gracias!" #Gracias1>
+					<h4>Gracias</h4>
+          Recuerda que es tu responsabilidad como trabajador procurar el auto cuidado de tu salud y suministrar información clara, completa y veraz sobre tu estado de salud.
+          <div class="button-container">
+            <button nbButton (click)="AtrasGracias1()">Anterior</button>
+            <button nbButton [disabled]="!validators.acepto" (click)="SendData(2)">Enviar</button>
+          </div>
+        </nb-step>
+        
+
+        <nb-step label="Gracias!" #Gracias2 [hidden]="true">
+					<h4>Gracias</h4>
+          <p>
+            Si hoy no has reportado síntomas de COVID-19, puedes continuar tus labores de forma usual. Si estás trabajando de manera remota, continúa con tus actividades normalmente y recuerda que debes diligenciar la encuesta de síntomas diariamente y cumplir las medidas de prevención para disminuir la posibilidad de contagio:
+          </p>
+          <div>
+            <ul>
+              <li>Utiliza siempre el tapabocas.</li>
+              <li>Evita tocar el tapabocas.</li>
+              <li>Evita comer alimentos en la calle.</li>
+              <li>Evita tocarte la cara.</li>
+              <li>Recuerda lavarte las manos con agua y jabón con frecuencia en especial al llegar a tu trabajo y al llegar a casa.</li>
+              <li>Antes de comer o tomar algo y antes colocarte y después de retirar el tapabocas.</li>
+              <li>El tapabocas de tela debes lavarlo con agua y jabón después de usarlo.</li>
+              <li>Si has tenido resultado positivo de pruebas COVID-19 en los últimos 15 días, debes informar el resultado y la conducta médica a tu empleador, y debes cumplir el aislamiento que te han indicado</li>
+            </ul>
+          </div>
+
+
+          <p>
+            Si hoy reportaste algún síntoma recuerda informar a tu EPS y actualizar CoronApp.
+          </p>
+
+          <div class="button-container">
+            <button nbButton (click)="AtrasGracias2()">Anterior</button>
+            <button nbButton (click)="SendData(1)" [disabled]="!validators.acepto">Enviar</button>
+          </div>
+        </nb-step>
+
+        <nb-step label="Guardando" #Guardando [hidden]="true">
+          
+          <div class="jumbotron text-center">
+            <h1 class="display-3">Gracias</h1>
+            <p class="lead">Estamos guardando tus datos</p>
+          </div>
+        </nb-step>
+
+        <nb-step label="Guardado" #Saved [hidden]="true">
+          
+          <div class="jumbotron text-center">
+            <h1 class="display-3">Gracias</h1>
+            <p class="lead">Se ha guardado tu informacion.</p>
+          </div>
+        </nb-step>
+        
+      </nb-stepper>
+		</form>
+	</nb-card-body>
+</nb-card>
